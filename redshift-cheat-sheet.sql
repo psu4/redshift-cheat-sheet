@@ -33,3 +33,12 @@ SELECT EXISTS (
 SELECT * FROM information_schema.columns where table_name='name' and column_name='name' ); -- return true or false
 
 
+--2. update tips
+
+-- 2.a. update a object within the json column
+
+update abc
+
+set json = (regexp_replace(json::text, '"owner": "abc@zoo.com"', '"owner": "xyz@zoo.com"')::json)
+
+where owner='abc@zoo.com' ;
