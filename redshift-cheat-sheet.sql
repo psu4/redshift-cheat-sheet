@@ -33,21 +33,3 @@ SELECT EXISTS (
 SELECT * FROM information_schema.columns where table_name='name' and column_name='name' ); -- return true or false
 
 
-SELECT * FROM information_schema.columns where table_name='name' and column_name='name'
-
--- 1.e. Show primary keys of a table in redshift
-
-select tco.constraint_schema,
-       tco.constraint_name,
-       kcu.ordinal_position as position,
-       kcu.column_name as key_column,
-       kcu.table_schema || '.' || kcu.table_name as table
-from information_schema.table_constraints tco
-join information_schema.key_column_usage kcu 
-     on kcu.constraint_name = tco.constraint_name
-     and kcu.constraint_schema = tco.constraint_schema
-     and kcu.constraint_name = tco.constraint_name
-where tco.constraint_type = 'PRIMARY KEY'
-order by tco.constraint_schema,
-         tco.constraint_name,
-         kcu.ordinal_position;
