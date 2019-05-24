@@ -50,3 +50,12 @@ order by tco.constraint_schema,
          kcu.ordinal_position;
 
 
+--2. update tips
+
+-- 2.a. update a object within the json column
+
+update abc
+
+set json = (regexp_replace(json::text, '"owner": "abc@zoo.com"', '"owner": "xyz@zoo.com"')::json)
+
+where owner='abc@zoo.com' ;
