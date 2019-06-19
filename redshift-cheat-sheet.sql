@@ -59,3 +59,29 @@ update abc
 set json = (regexp_replace(json::text, '"owner": "abc@zoo.com"', '"owner": "xyz@zoo.com"')::json)
 
 where owner='abc@zoo.com' ;
+
+--3. Json extract tips
+
+-- 3.a postgresql extract json columns
+
+-- https://stackoverflow.com/questions/32626261/how-to-parse-json-in-postgresql
+
+SELECT
+    column_name::json->'key_name' as new_column_name
+
+    FROM table ;
+
+
+
+-- 3.b redshift  extract json columns
+
+--https://docs.aws.amazon.com/redshift/latest/dg/JSON_EXTRACT_PATH_TEXT.html
+
+SELECT json_extract_path_text(column_name,'key_name', true) FROM table_name;
+
+-- 3.c. Replace a json object based on the key
+
+update table_name
+
+set coumn_name = (regexp_replace(column_name::text, '"key": "old_value"', '"key": "new_value"')::json);
+
