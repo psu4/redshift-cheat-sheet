@@ -42,4 +42,7 @@ elif df['A'].isnull().values.any() == True or df['A'].any() == 'None':
 
     df['A'] = df['A'].fillna(value=0)  # fill the 'None' objects as 0
 
+## reference: https://stackoverflow.com/questions/23743460/replace-none-with-nan-in-pandas-dataframe
+## https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.fillna.html
+
 
