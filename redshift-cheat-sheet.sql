@@ -2,9 +2,11 @@
 
 -- 1. table tips
 
+
 -- 1.a. alter table
 
 ALTER TABLE mqt_tabviews.fraud_rule_violations ADD COLUMN mcc_description varchar(1000) default NULL;
+
 
 -- 1.b. check user permissions
 
@@ -22,15 +24,18 @@ WHERE
 
 ;
 
+
 -- 1.c. check if a table exists or not
 
 SELECT * FROM information_schema.tables where table_name='table-name';
+
 
 -- 1.d. check if a column exists or not
 
 SELECT EXISTS (
 
 SELECT * FROM information_schema.columns where table_name='name' and column_name='name' ); -- return true or false
+
 
 -- 1.e. show primiary keys of a table
 
@@ -50,6 +55,22 @@ order by tco.constraint_schema,
          kcu.ordinal_position;
 
 
+-- 1.f. show the table schema
+
+select ddl
+from v_generate_tbl_ddl
+where schemaname in ('schema name')
+	and tablename in ('table name');
+order by seq;
+
+
+-- 1.g. show any running queries
+
+select pid, user_name, starttime, query
+from stv_recents
+where status='Running';
+
+
 --2. update tips
 
 -- 2.a. update a object within the json column
@@ -60,7 +81,9 @@ set json = (regexp_replace(json::text, '"owner": "abc@zoo.com"', '"owner": "xyz@
 
 where owner='abc@zoo.com' ;
 
+
 --3. Json extract tips
+
 
 -- 3.a postgresql extract json columns
 
@@ -78,6 +101,8 @@ SELECT
 --https://docs.aws.amazon.com/redshift/latest/dg/JSON_EXTRACT_PATH_TEXT.html
 
 SELECT json_extract_path_text(column_name,'key_name', true) FROM table_name;
+
+
 
 -- 3.c. Replace a json object based on the key
 
