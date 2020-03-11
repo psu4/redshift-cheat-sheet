@@ -258,3 +258,12 @@ def log(self, operation, response, message, actor=None):
 # or log error messages
 
 logging.error(format(e))
+
+
+###### (10) time ######
+
+the_date = datetime.today()
+
+print(the_date)
+
+# print out the current date in the format "2020-03-10 21:33:20.372350 "
