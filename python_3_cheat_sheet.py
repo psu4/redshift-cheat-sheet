@@ -97,6 +97,22 @@ elif dataframe_b['A'].isnull().values.any() is True or dataframe_b['A'].any() ==
 ## reference: https://stackoverflow.com/questions/23743460/replace-none-with-nan-in-pandas-dataframe
 ## https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.fillna.html
 
+###### (3) Check if the dataframe has a value equal to an int
+
+import pandas as pd
+import numpy as np
+
+data = ['2']
+
+df = pd.DataFrame(data)
+
+print(df)
+
+print(str(df.head(n=1)))
+
+if '2' in df.head(n=1).values:
+    print('yes')
+
 
 ##### (4) loop over 2 pandas data frames
 
