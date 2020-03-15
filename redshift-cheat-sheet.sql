@@ -71,6 +71,11 @@ from stv_recents
 where status='Running';
 
 
+-- 1.h. show inserting errors
+
+select * from stl_load_errors;
+
+
 --2. update tips
 
 -- 2.a. update a object within the json column
@@ -109,4 +114,5 @@ SELECT json_extract_path_text(column_name,'key_name', true) FROM table_name;
 update table_name
 
 set coumn_name = (regexp_replace(column_name::text, '"key": "old_value"', '"key": "new_value"')::json);
+
 
