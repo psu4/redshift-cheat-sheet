@@ -1,5 +1,10 @@
 ## pandas 0.24, python 3
 
+# more here
+# https://docs.google.com/document/d/0B84zOE6DopPldmV3RXZGcVZUSlU/edit
+# https://drive.google.com/drive/u/0/folders/0B84zOE6DopPlZ3E4dGc1d3hwQlU
+
+
 ##### (0) connect to the database and return a pandas dataframe
 
 import psycopg2
@@ -267,3 +272,16 @@ the_date = datetime.today()
 print(the_date)
 
 # print out the current date in the format "2020-03-10 21:33:20.372350 "
+
+
+######### (10) list comprehension:
+
+# Replace whitespaces with dashes for each item in a list -python
+
+# https://stackoverflow.com/questions/12486598/replace-whitespaces-with-dashes-for-each-item-in-a-list-python
+
+list=['3ds Max']
+
+a_list = [e.replace(" ", "_") for e in list]
+
+# a_list=['3ds_Max']
