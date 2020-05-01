@@ -22,6 +22,12 @@ df['x'].nunique()
 
 list_sorted=sorted(set(df['parent_prod_line_nm']))
 
+### 1.d. return unique combo and counts for more than 1 columns
+
+# https://stackoverflow.com/questions/35268817/unique-combinations-of-values-in-selected-columns-in-pandas-data-frame-and-count
+
+df1.groupby(['A','B']).size().reset_index().rename(columns={0:'count'})
+
 
 
 ##
@@ -165,6 +171,51 @@ from matplotlib import pyplot as plt
 sm.qqplot(df_account_dts_cleaned['parent_employee_count'], line='45')
 plt.show()
 
+## 5.e. adjust legends:
+
+## put legends outside the chart:
+
+# https://stackoverflow.com/questions/23556153/how-to-put-legend-outside-the-plot-with-pandas
+
+# I think you need to call plot before you add the calling legend.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+a = {'Test1': {1: 21867186, 4: 20145576, 10: 18018537},
+    'Test2': {1: 23256313, 4: 21668216, 10: 19795367}}
+
+d = pd.DataFrame(a).T
+#print d
+
+f = plt.figure()
+
+plt.title('Title here!', color='black')
+d.plot(kind='bar', ax=f.gca())
+plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
+plt.show()
+
+# ----- Panda solution If you are using pandas Dataframe.plot
+
+dataframe_var.plot.bar().legend(loc='center left',bbox_to_anchor=(1.0, 0.5));
+
+# 5.f. plotting the line plots
+
+# if you have the error "TypeError: float() argument must be a string or a number, not 'Period'"
+
+# call the following line: https://stackoverflow.com/questions/43206554/typeerror-float-argument-must-be-a-string-or-a-number-not-period
+
+pd.plotting.register_matplotlib_converters()
+
+ax1=forecast.plot.line(x='ds', y='yhat', title='Affirm BinHash Forecasting')
+ax2=forecast.plot.line(x='ds', y='yhat_lower', ax=ax1)
+ax3=forecast.plot.line(x='ds', y='yhat_upper', ax=ax1)
+
+ax1.set(ylabel="Usage Count")
+
+print(ax1 == ax2 == ax3)
+
+
+
 ## 6. group by
 
 # 6.a. group by with conditions and count x column
@@ -208,3 +259,55 @@ df_account_dts_labelled_sum_renewal_qty\
 # each item in the list has space in between words, so trying to replace space with underscores
 
 a_list = [e.replace(" ", "_") for e in list_sorted]
+
+
+# 8. select
+
+# https://davidhamann.de/2017/06/26/pandas-select-elements-by-string/
+
+# testing data
+
+# import pandas as pd
+#
+# #create sample data
+# data = {'model': ['Lisa', 'Lisa 2', 'Macintosh 128K', 'Macintosh 512K'],
+#         'launched': [1983,1984,1984,1984],
+#         'discontinued': [1986, 1985, 1984, 1986]}
+#
+# df = pd.DataFrame(data, columns = ['model', 'launched', 'discontinued'])
+
+df[df['model'].str.match('Mac')]
+
+df[df['model'].str.contains('ac')]
+
+
+## 8. compare training and test sets using Kolmogorov–Smirnov test
+
+from scipy import stats
+
+stats.ks_2samp(x_train_outliers_removal['renewal_qty'].values, x_test_outliers_removal['renewal_qty'].values)
+
+for column in x_test_outliers_removal:
+    # Select column contents by column name using [] operator
+
+    columnSeriesObj = x_test_outliers_removal[column]
+
+    columnSeriesObj2 = x_train_outliers_removal[column]
+
+    print(column)
+
+    print(stats.ks_2samp(columnSeriesObj.values, columnSeriesObj2.values))
+
+    import random
+    import numpy
+    from matplotlib import pyplot
+
+    x = columnSeriesObj.values
+    y = columnSeriesObj2.values
+
+    bins = np.linspace(0, 10, 100)
+
+    pyplot.hist(x, bins, alpha=1, label='Test')  # color='#0696D7'
+    pyplot.hist(y, bins, alpha=1, label='Training')  # , color = 'blue'
+    pyplot.legend(loc='upper right')
+    pyplot.show()
