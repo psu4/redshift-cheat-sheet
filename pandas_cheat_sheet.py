@@ -34,8 +34,6 @@ df1.groupby(['A','B']).size().reset_index().rename(columns={0:'count'})
 
 ## 2. DROP rows or columns related
 
-
-
 df=df.drop_duplicates('column_number')
 
 # drop column A & B
@@ -111,7 +109,7 @@ list(my_dataframe.columns.values)
 
 ## 4. Time stamps related
 
-# 2.a. get months from mm-dd-yyyy
+# 4.a. get months from mm-dd-yyyy
 
 # df_account_dts_labelled_sum_renewal_qty['asset_sub_end_date_month']='2016-03-24'
 
@@ -254,6 +252,17 @@ df_account_dts_labelled_sum_renewal_qty\
 #                         transform(lambda x: x.str.contains('gold', case=False).any()).astype(int)
 
 
+# 6.e. pivot table
+
+df_customer_profile_device_platform = df_customer_profile[['customer_id','device_platform']]\
+.pivot_table(index="customer_id", aggfunc=("count"))
+
+# 6.f. pivot table return unique numbers
+
+# https://stackoverflow.com/questions/12860421/python-pandas-pivot-table-with-aggfunc-count-unique-distinct
+
+aggfunc=pd.Series.nunique
+
 # 7.a. Replace
 
 # each item in the list has space in between words, so trying to replace space with underscores
@@ -311,3 +320,10 @@ for column in x_test_outliers_removal:
     pyplot.hist(y, bins, alpha=1, label='Training')  # , color = 'blue'
     pyplot.legend(loc='upper right')
     pyplot.show()
+
+
+# 8. create an empty dataframe with the same column names as the other
+
+list(df_original) # return the column names in a list
+
+df_new=pd.DataFrame(columns=list(df_original))
