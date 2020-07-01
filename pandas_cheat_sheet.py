@@ -146,6 +146,10 @@ group by agreement_number, count(subscription_level)
 
 ## 5. visualization
 
+## 5.0. see the distribution of all the numerical data
+                              
+df.hist(figsize=(12, 12), color='green')
+                              
 ## 5.a. barplot
 
 df.plot.bar(x='subscription_level', y='agreement_number', rot=30)
