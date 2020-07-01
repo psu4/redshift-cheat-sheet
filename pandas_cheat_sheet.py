@@ -1,3 +1,20 @@
+# -1.
+
+# differences between Pandas Merge and join  
+
+Join
+
+# The join method works best when we are joining dataframes on their indexes (though you can specify another column to join on for the left dataframe).
+
+Merge
+
+# The merge method is more versatile and allows us to specify columns besides the index to join on for both dataframes. 
+
+# If the index gets reset to a counter post merge, we can use set_index to change it back.
+
+df=df2.merge(df3, how='inner', on='column_name')
+
+
 # 0. find/search/locate data
 
 # interview question:
