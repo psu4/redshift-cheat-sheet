@@ -2,7 +2,7 @@
 
 # interview question:
 
-0.a. Difference between loc & iloc & ix:
+# 0.a. Difference between loc & iloc & ix:
   
 (1) loc gets rows (or columns) with particular labels from the index.
 
