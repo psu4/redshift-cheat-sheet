@@ -1,4 +1,19 @@
+# 0. find/search/locate data
 
+# interview question:
+
+0.a. Difference between loc & iloc & ix:
+  
+(1) loc gets rows (or columns) with particular labels from the index.
+
+(2) iloc gets rows (or columns) at particular positions in the index (so it only takes integers).
+
+(3) (deprecated) ix usually tries to behave like loc but falls back to behaving like iloc if a label is not present in the index.
+
+# 0.b. find all the row with conditions 
+
+df.loc[(df['A'] > int(100) & (df['B'] > int(100)]
+                              
 # 1. unique values
 
 # 1.a return unique sorted value from a dataframe
