@@ -43,7 +43,7 @@ list_sorted=sorted(set(df['parent_prod_line_nm']))
 
 df1.groupby(['A','B']).size().reset_index().rename(columns={0:'count'})
 
-
+                              
 
 ##
 
@@ -341,8 +341,14 @@ for column in x_test_outliers_removal:
     pyplot.show()
 
 
-# 8. create an empty dataframe with the same column names as the other
+# 9. create an empty dataframe with the same column names as the other
 
 list(df_original) # return the column names in a list
 
 df_new=pd.DataFrame(columns=list(df_original))
+                              
+# 10. drop NA
+df=df.dropna()
+                              
+                              
+ 
