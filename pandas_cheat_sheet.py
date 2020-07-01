@@ -3,6 +3,8 @@
 # interview question:
 
 # 0.a. Difference between loc & iloc & ix:
+
+# https://stackoverflow.com/questions/31593201/how-are-iloc-ix-and-loc-different#:~:text=loc%20gets%20rows%20(or%20columns,not%20present%20in%20the%20index.
   
 (1) loc gets rows (or columns) with particular labels from the index.
 
@@ -350,5 +352,37 @@ df_new=pd.DataFrame(columns=list(df_original))
 # 10. drop NA
 df=df.dropna()
                               
+################################ pandas pair-coding interview encountered in real life ####################################
+
+# 1. group by and rank (April 2020 Autodesk)
                               
+import pandas as pd
+
+df=pd.DataFrame(
+[
+{'productID':'1',"sales_id":"1","sales_value":"100"},
+{'productID':'1',"sales_id":"2","sales_value":"200"},
+{'productID':'1',"sales_id":"3","sales_value":"300"},
+{'productID':'2',"sales_id":"4","sales_value":"100"},
+{'productID':'2',"sales_id":"5","sales_value":"200"},
+{'productID':'3',"sales_id":"6","sales_value":"100"},
+{'productID':'3',"sales_id":"7","sales_value":"200"},
+{'productID':'3',"sales_id":"8","sales_value":"300"},
+{'productID':'3',"sales_id":"9","sales_value":"400"}
+])
+
+# Question: find the N highest values sales for each product
+
+# Solution
+
+# step 1: generate a rank column based on sales_value for each productID
+
+df['rank']=df.groupby("productID")["sales_value"].rank(ascending=False)
+
+# step 2: choose the rank that is smaller  or equal to 3
+
+df.loc[df['rank']<=3]
+
+
+
  
